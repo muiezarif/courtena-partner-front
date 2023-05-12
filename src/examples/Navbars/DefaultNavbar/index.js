@@ -95,7 +95,7 @@ function DefaultNavbar({ transparent, light, action }) {
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
         {/* <SoftAvatar src={brand} alt="Avatar" size="sm" /> */}
           <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Courtena Admin
+            Courtena Partner
           </SoftTypography>
         </SoftBox>
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
