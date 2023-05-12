@@ -40,7 +40,7 @@ export default styled(Box)(({ theme, ownerState }) => {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    minHeight: pxToRem(60),
+    minHeight: pxToRem(40),
     backgroundImage: backgroundImageValue,
     color: white.main,
     position: "relative",
@@ -48,7 +48,8 @@ export default styled(Box)(({ theme, ownerState }) => {
     marginBottom: pxToRem(16),
     border: borderValue,
     borderRadius: borderRadius.md,
-    fontSize: fontSizeRegular,
+    // fontSize: fontSizeRegular,
+    fontSize: 12,
     fontWeight: fontWeightMedium,
   };
 });

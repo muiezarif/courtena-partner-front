@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 
 // react-router components
 import { useLocation, Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -36,6 +36,7 @@ import SoftInput from "components/SoftInput";
 // Soft UI Dashboard React examples
 import Breadcrumbs from "examples/Breadcrumbs";
 import NotificationItem from "examples/Items/NotificationItem";
+import SimpleMenuItem from "examples/Items/SimpleMenuItem";
 
 // Custom styles for DashboardNavbar
 import {
@@ -63,8 +64,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
+  const [openAccountMenu, setOpenAccountMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
-
+  let navigate = useNavigate();
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -95,6 +97,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+  const handleOpenAccountMenu = (event) => setOpenAccountMenu(event.currentTarget);
+  const handleCloseAccountMenu = () => setOpenAccountMenu(false);
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -134,6 +138,32 @@ function DashboardNavbar({ absolute, light, isMini }) {
       />
     </Menu>
   );
+  const renderAccountMenu = () => (
+    <Menu
+      anchorEl={openAccountMenu}
+      anchorReference={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={Boolean(openAccountMenu)}
+      onClose={handleCloseAccountMenu}
+      sx={{ mt: 2 }}
+    >
+      <SimpleMenuItem
+        title={"Logout"}
+        onClick={() => {
+          // Clear the user data and token from localStorage
+            localStorage.removeItem('admin');
+            localStorage.removeItem('token');
+            localStorage.removeItem('adminRemainLoggedIn');
+            navigate("/authentication/sign-in")
+            handleCloseAccountMenu()
+        }}
+      />
+      
+    </Menu>
+  );
 
   return (
     <AppBar
@@ -147,31 +177,44 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </SoftBox>
         {isMini ? null : (
           <SoftBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <SoftBox pr={1}>
+            {/* <SoftBox pr={1}>
               <SoftInput
                 placeholder="Type here..."
                 icon={{ component: "search", direction: "left" }}
               />
-            </SoftBox>
+            </SoftBox> */}
             <SoftBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in">
-                <IconButton sx={navbarIconButton} size="small">
-                  <Icon
+                {/* <IconButton sx={navbarIconButton} size="small"> */}
+                  {/* <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
                     })}
                   >
                     account_circle
-                  </Icon>
-                  <SoftTypography
+                  </Icon> */}
+                  {/* <SoftTypography
                     variant="button"
                     fontWeight="medium"
                     color={light ? "white" : "dark"}
                   >
                     Sign in
-                  </SoftTypography>
-                </IconButton>
+                  </SoftTypography> */}
+                {/* </IconButton> */}
               </Link>
+              <IconButton
+                size="small"
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleOpenAccountMenu}
+              >
+                <Icon className={light ? "text-white" : "text-dark"}>account_circle</Icon>
+              </IconButton>
+              {renderMenu()}
+              {renderAccountMenu()}
               <IconButton
                 size="small"
                 color="inherit"
@@ -182,15 +225,15 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
-              <IconButton
+              {/* <IconButton
                 size="small"
                 color="inherit"
                 sx={navbarIconButton}
                 onClick={handleConfiguratorOpen}
               >
                 <Icon>settings</Icon>
-              </IconButton>
-              <IconButton
+              </IconButton> */}
+              {/* <IconButton
                 size="small"
                 color="inherit"
                 sx={navbarIconButton}
@@ -201,7 +244,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
               </IconButton>
-              {renderMenu()}
+              {renderMenu()} */}
             </SoftBox>
           </SoftBox>
         )}

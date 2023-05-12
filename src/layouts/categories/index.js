@@ -36,7 +36,7 @@ import routes from "routes";
 import brand from "assets/images/courtena-logo-black-nobg.png";
 import Sidenav from "examples/Sidenav";
 import Configurator from "examples/Configurator";
-function Dashboard() {
+function Categories() {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   const [controller, dispatch] = useSoftUIController();
@@ -197,4 +197,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Categories;

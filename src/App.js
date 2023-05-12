@@ -41,12 +41,13 @@ import createCache from "@emotion/cache";
 
 // Soft UI Dashboard React routes
 import routes from "routes";
+import allRoutes from "allRoutes";
 
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+import brand from "assets/images/courtena-logo-black-nobg.png";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -54,7 +55,25 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  // useEffect(() => {
+  //   const cleanup = () => {
+  //     const loggedIn = Boolean(localStorage.getItem('adminRemainLoggedIn'));
+  //   if(loggedIn){
+  //     if(loggedIn == false){
+  //       localStorage.removeItem('admin');
+  //       localStorage.removeItem('token');
+  //       localStorage.removeItem('adminRemainLoggedIn');
+  //     }
+  //   }
+      
+  //   };
 
+  //   window.addEventListener('beforeunload', cleanup);
+
+  //   return () => {
+  //     window.removeEventListener('beforeunload', cleanup);
+  //   };
+  // }, []);
   // Cache for the rtl
   useMemo(() => {
     const cacheRtl = createCache({
@@ -141,7 +160,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={brand}
-              brandName="Soft UI Dashboard"
+              brandName="Courtena"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -152,8 +171,8 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+          {getRoutes(allRoutes)}
+          <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -165,7 +184,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={brand}
-            brandName="Soft UI Dashboard"
+            brandName="Courtena"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -176,8 +195,8 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
-        {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        {getRoutes(allRoutes)}
+        <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
       </Routes>
     </ThemeProvider>
   );

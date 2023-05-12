@@ -38,11 +38,8 @@ import curved6 from "assets/images/curved-images/curved14.jpg";
 import { useNavigate } from "react-router-dom";
 import SoftAlert from "components/SoftAlert";
 import courtena from "api/courtena";
-function SignUp() {
-  const [agreement, setAgremment] = useState(true);
-  const [username, setUsername] = useState("");
+function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error,setError] = useState(false)
   const [success,setSuccess] = useState(false)
   const [errorMessage,setErrorMessage] = useState("")
@@ -90,14 +87,14 @@ function SignUp() {
   }
   return (
     <BasicLayout
-      title="Welcome!"
+      title=""
       description=""
       image={curved6}
     >
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
-            Register
+            Forgot Password ?
           </SoftTypography>
         </SoftBox>
         {/* <SoftBox mb={2}>
@@ -109,40 +106,15 @@ function SignUp() {
           {error ? <SoftAlert color="error" dismissible onClick={() => setError(false)} > {errorMessage}</SoftAlert> : null}
           {success ? <SoftAlert color="success" dismissible onClick={() => setSuccess(false)} > {successMessage}</SoftAlert> : null}
             <SoftBox mb={2}>
-              <SoftInput name="username" onChange={(val) => setUsername(val.target.value)} type="text" placeholder="Username" />
-            </SoftBox>
-            <SoftBox mb={2}>
               <SoftInput name="email" onChange={(val) => setEmail(val.target.value)} type="email" placeholder="Email" />
             </SoftBox>
-            <SoftBox mb={2}>
-              <SoftInput name="password" onChange={(val) => setPassword(val.target.value)} type="password" placeholder="Password" />
-            </SoftBox>
-            {/* <SoftBox display="flex" alignItems="center">
-              <Checkbox checked={agreement} onChange={handleSetAgremment} />
-              <SoftTypography
-                variant="button"
-                fontWeight="regular"
-                onClick={handleSetAgremment}
-                sx={{ cursor: "poiner", userSelect: "none" }}
-              >
-                &nbsp;&nbsp;I agree the&nbsp;
-              </SoftTypography>
-              <SoftTypography
-                component="a"
-                href="#"
-                variant="button"
-                fontWeight="bold"
-                textGradient
-              >
-                Terms and Conditions
-              </SoftTypography>
-            </SoftBox> */}
+            
             <SoftBox mt={4} mb={1}>
               <SoftButton onClick={() => handleSubmit()} variant="gradient" color="dark" fullWidth>
-                sign up
+                Send
               </SoftButton>
             </SoftBox>
-            <SoftBox mt={3} textAlign="center">
+            {/* <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Already have an account?&nbsp;
                 <SoftTypography
@@ -156,7 +128,7 @@ function SignUp() {
                   Sign in
                 </SoftTypography>
               </SoftTypography>
-            </SoftBox>
+            </SoftBox> */}
           </SoftBox>
         </SoftBox>
       </Card>
@@ -164,4 +136,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default ForgotPassword;

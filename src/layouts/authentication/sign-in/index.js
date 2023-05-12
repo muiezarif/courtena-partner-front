@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -32,26 +32,64 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import curved9 from "assets/images/curved-images/curved-6.jpg";
-
-function SignIn() {
+import {connect, useDispatch} from "react-redux"
+import { loginAdmin } from "../../../actions";
+import courtena from "api/courtena";
+import { useNavigate } from "react-router-dom";
+import SoftAlert from "components/SoftAlert";
+function SignIn(props) {
   const [rememberMe, setRememberMe] = useState(true);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error,setError] = useState(false)
+  const [errorMessage,setErrorMessage] = useState("")
+  let navigate = useNavigate();
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
+  const handleSubmit = async (e) => {
+    const data = {email:email,password:password}
+    await courtena.post("/auth/login-admin",{...data},{
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*'
+    }
+    }).then((response) => {
+      console.log(response.data)
+      if(response.data.success){
+        localStorage.setItem('admin', JSON.stringify(response.data.result));
+        localStorage.setItem('token', response.data.result.token);
+        localStorage.setItem('adminRemainLoggedIn', true);
+        navigate("/dashboard")
+      }else{
+        setError(true)
+        setErrorMessage(response.data.message)
+      }
+      
+    }).catch(err => console.log(err.message));
+  }
+  useEffect(() => {
+    const loggedIn = Boolean(localStorage.getItem('adminRemainLoggedIn'));
+    console.log(loggedIn)
+    if(loggedIn){
+      if(loggedIn == true){
+        navigate("/dashboard")
+      }
+    }
+  },[])
   return (
     <CoverLayout
       title="Welcome back"
-      description="Enter your email and password to sign in"
+      description=""
       image={curved9}
     >
       <SoftBox component="form" role="form">
+        {error ? <SoftAlert color="error" dismissible onClick={() => setError(false)} > {errorMessage}</SoftAlert> : null}
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Email
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="email" placeholder="Email" />
+          <SoftInput name="email" onChange={(val) => setEmail(val.target.value)} type="email" placeholder="Email" />
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
@@ -59,9 +97,9 @@ function SignIn() {
               Password
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="password" placeholder="Password" />
+          <SoftInput name="password" onChange={(val) => setPassword(val.target.value)} type="password" placeholder="Password" />
         </SoftBox>
-        <SoftBox display="flex" alignItems="center">
+        {/* <SoftBox display="flex" alignItems="center">
           <Switch checked={rememberMe} onChange={handleSetRememberMe} />
           <SoftTypography
             variant="button"
@@ -71,11 +109,26 @@ function SignIn() {
           >
             &nbsp;&nbsp;Remember me
           </SoftTypography>
-        </SoftBox>
+        </SoftBox> */}
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" fullWidth>
+          <SoftButton onClick={() => handleSubmit()} variant="gradient" color="info" fullWidth>
             sign in
           </SoftButton>
+        </SoftBox>
+        <SoftBox mt={3} textAlign="center">
+          
+            <SoftTypography
+              component={Link}
+              to="/authentication/forgot-password"
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+              
+            >
+              Forgot Password ?
+            </SoftTypography>
+          
         </SoftBox>
         <SoftBox mt={3} textAlign="center">
           <SoftTypography variant="button" color="text" fontWeight="regular">
@@ -87,6 +140,7 @@ function SignIn() {
               color="info"
               fontWeight="medium"
               textGradient
+              
             >
               Sign up
             </SoftTypography>
@@ -96,5 +150,14 @@ function SignIn() {
     </CoverLayout>
   );
 }
-
-export default SignIn;
+const mapStateToProps = (state) =>{
+  return {
+      responseData:state.auth.user
+  };
+}
+const mapDispatchToProps = (dispatch) =>{
+  return {
+      login:dispatch(loginAdmin())
+  };
+}
+export default connect(mapStateToProps,{loginAdmin})(SignIn);

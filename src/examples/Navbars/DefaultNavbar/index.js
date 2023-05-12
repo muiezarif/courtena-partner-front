@@ -36,7 +36,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-
+import SoftAvatar from "components/SoftAvatar";
+import brand from "assets/images/courtena-logo-black-nobg.png"
 function DefaultNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
@@ -92,13 +93,14 @@ function DefaultNavbar({ transparent, light, action }) {
         })}
       >
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
+        {/* <SoftAvatar src={brand} alt="Avatar" size="sm" /> */}
           <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Soft UI Dashboard
+            Courtena Admin
           </SoftTypography>
         </SoftBox>
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
+          {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} /> */}
+          {/* <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
           <DefaultNavbarLink
             icon="account_circle"
             name="sign up"
@@ -112,7 +114,7 @@ function DefaultNavbar({ transparent, light, action }) {
             light={light}
           />
         </SoftBox>
-        {action &&
+        {/* {action &&
           (action.type === "internal" ? (
             <SoftBox display={{ xs: "none", lg: "inline-block" }}>
               <SoftButton
@@ -141,7 +143,7 @@ function DefaultNavbar({ transparent, light, action }) {
                 {action.label}
               </SoftButton>
             </SoftBox>
-          ))}
+          ))} */}
         <SoftBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}

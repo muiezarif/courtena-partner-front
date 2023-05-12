@@ -36,13 +36,14 @@ import routes from "routes";
 import brand from "assets/images/courtena-logo-black-nobg.png";
 import Sidenav from "examples/Sidenav";
 import Configurator from "examples/Configurator";
-function Dashboard() {
+import { useNavigate } from "react-router-dom";
+function Dashboard2() {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
-
+  let navigate = useNavigate();
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
     if (miniSidenav && !onMouseEnter) {
@@ -100,15 +101,76 @@ function Dashboard() {
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid onClick={() => {navigate("/categories")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Categories" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/partners")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Partners" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/customers")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Customers" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/bookings")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Bookings" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/settlements")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Settlements" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/subscriptions")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Subscriptions" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/reports")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Reports" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            {/* <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "today's money" }}
                 count="$53,000"
                 percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: "paid" }}
               />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            </Grid> */}
+            {/* <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "today's users" }}
                 count="2,300"
@@ -134,10 +196,10 @@ function Dashboard() {
                   component: "shopping_cart",
                 }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </SoftBox>
-        <SoftBox mb={3}>
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={7}>
               <BuildByDevelopers />
@@ -146,8 +208,8 @@ function Dashboard() {
               <WorkWithTheRockets />
             </Grid>
           </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
+        </SoftBox> */}
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={5}>
               <ReportsBarChart
@@ -182,19 +244,19 @@ function Dashboard() {
               />
             </Grid>
           </Grid>
-        </SoftBox>
-        <Grid container spacing={3}>
+        </SoftBox> */}
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={8}>
             <Projects />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <OrderOverview />
           </Grid>
-        </Grid>
+        </Grid> */}
       </SoftBox>
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default Dashboard;
+export default Dashboard2;
