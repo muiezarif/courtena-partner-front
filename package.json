@@ -5,6 +5,7 @@
   "license": "SEE LICENSE IN <https://www.creative-tim.com/license>",
   "description": "ReactJS version of Soft UI Dashboard by Creative Tim",
   "dependencies": {
+    "@dropzone-ui/react": "^7.0.4",
     "@emotion/cache": "11.9.3",
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",

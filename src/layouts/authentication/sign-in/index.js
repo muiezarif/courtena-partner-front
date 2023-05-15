@@ -47,7 +47,7 @@ function SignIn(props) {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleSubmit = async (e) => {
     const data = {email:email,password:password}
-    await courtena.post("/auth/login-admin",{...data},{
+    await courtena.post("/auth/login-partner",{...data},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': '*/*'
@@ -55,9 +55,9 @@ function SignIn(props) {
     }).then((response) => {
       console.log(response.data)
       if(response.data.success){
-        localStorage.setItem('admin', JSON.stringify(response.data.result));
+        localStorage.setItem('partner', JSON.stringify(response.data.result));
         localStorage.setItem('token', response.data.result.token);
-        localStorage.setItem('adminRemainLoggedIn', true);
+        localStorage.setItem('partnerRemainLoggedIn', true);
         navigate("/dashboard")
       }else{
         setError(true)

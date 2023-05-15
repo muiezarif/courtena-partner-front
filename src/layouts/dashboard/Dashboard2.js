@@ -85,7 +85,7 @@ function Dashboard2() {
   );
   return (
     <DashboardLayout>
-      <>
+      {/* <>
             <Sidenav
               color={sidenavColor}
               brand={brand}
@@ -96,27 +96,11 @@ function Dashboard2() {
             />
             <Configurator />
             {configsButton}
-          </>
+          </> */}
       <DashboardNavbar />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
-            <Grid onClick={() => {navigate("/categories")}} item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Categories" }}
-                icon={{ color: "", component: "" }}
-                
-              />
-            </Grid>
-            <Grid onClick={() => {navigate("/partners")}} item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Partners" }}
-                count=""
-                percentage={{ color: "", text: "" }}
-                icon={{ color: "", component: "" }}
-                
-              />
-            </Grid>
             <Grid onClick={() => {navigate("/customers")}} item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Customers" }}

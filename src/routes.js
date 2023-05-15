@@ -57,6 +57,7 @@ import Cube from "examples/Icons/Cube";
 import Categories from "layouts/categories";
 import ForgotPassword from "layouts/authentication/forgotpassword";
 import Partners from "layouts/partners";
+import Venues from "layouts/venues";
 
 const routes = [
   {
@@ -68,22 +69,31 @@ const routes = [
     component: <Dashboard />,
     noCollapse: true,
   },
+  // {
+  //   type: "collapse",
+  //   name: "Categories",
+  //   key: "categories",
+  //   route: "/categories",
+  //   icon: <Shop size="12px" />,
+  //   component: <Categories />,
+  //   noCollapse: true,
+  // },
+  // {
+  //   type: "collapse",
+  //   name: "Partners",
+  //   key: "partners",
+  //   route: "/partners",
+  //   icon: <Shop size="12px" />,
+  //   component: <Partners />,
+  //   noCollapse: true,
+  // },
   {
     type: "collapse",
-    name: "Categories",
-    key: "categories",
-    route: "/categories",
+    name: "Venues",
+    key: "venues",
+    route: "/venues",
     icon: <Shop size="12px" />,
-    component: <Categories />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Partners",
-    key: "partners",
-    route: "/partners",
-    icon: <Shop size="12px" />,
-    component: <Partners />,
+    component: <Venues />,
     noCollapse: true,
   },
   {

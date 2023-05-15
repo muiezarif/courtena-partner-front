@@ -28,6 +28,9 @@ import Customers from "layouts/customers";
 import Bookings from "layouts/bookings";
 import Settlements from "layouts/settlements";
 import Reports from "layouts/reports";
+import Venues from "layouts/venues";
+import AddVenue from "layouts/venues/AddVenue";
+import EditVenue from "layouts/venues/EditVenue";
 
 
 const allRoutes = [
@@ -65,6 +68,33 @@ const allRoutes = [
     route: "/partners/add-partners",
     icon: <Shop size="12px" />,
     component: <AddPartners />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Venues",
+    key: "venues",
+    route: "/venues",
+    icon: <Shop size="12px" />,
+    component: <Venues />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Add Venues",
+    key: "add-venues",
+    route: "/venues/add-venue",
+    icon: <Shop size="12px" />,
+    component: <AddVenue />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Edit Venues",
+    key: "edit-venues",
+    route: "/venues/edit-venue",
+    icon: <Shop size="12px" />,
+    component: <EditVenue />,
     noCollapse: true,
   },
   {

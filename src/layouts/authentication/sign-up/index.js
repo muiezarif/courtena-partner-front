@@ -43,6 +43,8 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
   const [error,setError] = useState(false)
   const [success,setSuccess] = useState(false)
   const [errorMessage,setErrorMessage] = useState("")
@@ -51,11 +53,11 @@ function SignUp() {
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    const data = {username:username,email:email,password:password}
+    const data = {username:username,email:email,password:password,phone:phone,city:city}
     // const data = {}
     console.log(email)
     console.log(password)
-    await courtena.post("/auth/register-admin",{...data},{
+    await courtena.post("/auth/register-partner",{...data},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': '*/*'
@@ -116,6 +118,12 @@ function SignUp() {
             </SoftBox>
             <SoftBox mb={2}>
               <SoftInput name="password" onChange={(val) => setPassword(val.target.value)} type="password" placeholder="Password" />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput name="city" onChange={(val) => setCity(val.target.value)} type="text" placeholder="City" />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput name="phone" onChange={(val) => setPhone(val.target.value)} type="tel" placeholder="Phone" />
             </SoftBox>
             {/* <SoftBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
