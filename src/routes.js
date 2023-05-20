@@ -58,6 +58,7 @@ import Categories from "layouts/categories";
 import ForgotPassword from "layouts/authentication/forgotpassword";
 import Partners from "layouts/partners";
 import Venues from "layouts/venues";
+import Courts from "layouts/courts";
 
 const routes = [
   {
@@ -94,6 +95,15 @@ const routes = [
     route: "/venues",
     icon: <Shop size="12px" />,
     component: <Venues />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Courts",
+    key: "courts",
+    route: "/courts",
+    icon: <Shop size="12px" />,
+    component: <Courts />,
     noCollapse: true,
   },
   {

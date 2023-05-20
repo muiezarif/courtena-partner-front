@@ -101,6 +101,24 @@ function Dashboard2() {
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
+          <Grid onClick={() => {navigate("/venues")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Venues" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
+            <Grid onClick={() => {navigate("/courts")}} item xs={12} sm={6} xl={3}>
+              <MiniStatisticsCard
+                title={{ text: "Courts" }}
+                count=""
+                percentage={{ color: "", text: "" }}
+                icon={{ color: "", component: "" }}
+                
+              />
+            </Grid>
             <Grid onClick={() => {navigate("/customers")}} item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Customers" }}

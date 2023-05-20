@@ -29,7 +29,7 @@ import Table from "examples/Tables/Table";
 // Data
 // import partnersTableData from "layouts/tables/data/partnersTableData";
 
-import { Checkbox, FormControlLabel, FormGroup, Grid, Icon, Switch } from "@mui/material";
+import { Backdrop, Checkbox, CircularProgress, FormControlLabel, FormGroup, Grid, Icon, Switch } from "@mui/material";
 import SoftButton from "components/SoftButton";
 
 import { useNavigate } from "react-router-dom";
@@ -84,33 +84,105 @@ function EditVenue() {
   const [sundayOpen,setSundayOpen] = useState(false)
   const [holidayOpen,setHolidayOpen] = useState(false)
   const [price,setPrice] = useState(0)
+  const [backdrop,setBackdrop] = useState(false)
   let navigate = useNavigate();
   let location = useLocation()
   const [files, setFiles] = useState([]);
   const updateFiles = (incommingFiles) => {
     setFiles(incommingFiles);
   };
+  async function getVenueDetails() {
+    var partnerInfoString = localStorage.getItem("partner")
+    var partnerInfo = JSON.parse(partnerInfoString)
+    setBackdrop(true)
+    await courtena.get("/venues/get-venue/"+location.state.venueId,{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': '*/*',
+          'Authorization': partnerInfo.token
+      }
+      }).then((response) => {
+        console.log(response.data)
+        if(response.data.success){
+            setAddress(response.data.result.address)
+            setName(response.data.result.name)
+            setCity(response.data.result.city)
+            setDescription(response.data.result.description)
+            setPrice(response.data.result.cheapestPrice)
+            setContactNum(response.data.result.venuePhone)
+            setMondayOpen(response.data.result.timing.mondayOn)
+            setMondayFrom(response.data.result.timing.mondayFrom)
+            setMondayTo(response.data.result.timing.mondayTo)
+            setTuesdayOpen(response.data.result.timing.tuesdayOn)
+            setTuesdayFrom(response.data.result.timing.tuesdayFrom)
+            setTuesdayTo(response.data.result.timing.tuesdayTo)
+            setWednesdayOpen(response.data.result.timing.wedOn)
+            setWedFrom(response.data.result.timing.wedFrom)
+            setWedTo(response.data.result.timing.wedTo)
+            setThursdayOpen(response.data.result.timing.thursdayOn)
+            setThursdayFrom(response.data.result.timing.thursdayFrom)
+            setThursdayTo(response.data.result.timing.thursdayTo)
+            setFridayOpen(response.data.result.timing.fridayOn)
+            setFriFrom(response.data.result.timing.fridayFrom)
+            setFriTo(response.data.result.timing.fridayTo)
+            setSaturdayOpen(response.data.result.timing.satOn)
+            setSatFrom(response.data.result.timing.satFrom)
+            setSatTo(response.data.result.timing.satTo)
+            setSundayOpen(response.data.result.timing.sunOn)
+            setSunFrom(response.data.result.timing.sunFrom)
+            setSunTo(response.data.result.timing.sunTo)
+            setHolidayOpen(response.data.result.timing.holidayOn)
+            setHolidayFrom(response.data.result.timing.holidayFrom)
+            setHolidayTo(response.data.result.timing.holidayTo)
+            setCafeteria(response.data.result.amenities.cafeteria)
+            setChangingRoom(response.data.result.amenities.changeRoom)
+            setDisabledAccess(response.data.result.amenities.disabledAccess)
+            setFreeParking(response.data.result.amenities.freeParking)
+            setLockers(response.data.result.amenities.lockers)
+            setMaterialRenting(response.data.result.amenities.materialRenting)
+            setPlayPark(response.data.result.amenities.playPark)
+            setPrivateParking(response.data.result.amenities.privateParking)
+            setRestaurant(response.data.result.amenities.restaurant)
+            setSnackBar(response.data.result.amenities.snackbar)
+            setStore(response.data.result.amenities.store)
+            setVendingMachine(response.data.result.amenities.vendingMachine)
+            setWifi(response.data.result.amenities.wifi)
+            setBackdrop(false)
+            setSuccess(true)
+            setSuccessMessage(response.data.message)
+        }else{
+            setBackdrop(false)
+            setError(true)
+            setErrorMessage(response.data.message)
+        }
+        
+      }).catch(err => console.log(err.message));
+  }
   useEffect(() => {
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
-    console.log(location.state)
+    console.log(location.state.venueId)
+    getVenueDetails()
   },[])
   const handleSubmit = async (e) => {
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
-    const data = {name:name,city:city,address:address,description:description,cheapestPrice:price,venuePhone:contactNum,postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
-    await courtena.post("/venues/create",{...data},{
+    const data = {name:name,city:city,address:address,description:description,cheapestPrice:price,venuePhone:contactNum,postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,playPark:playPark,disabledAccess:disabledAccess,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
+    setBackdrop(true)
+    await courtena.put("/venues/"+location.state.venueId+"/update",{...data},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': '*/*',
         'Authorization': partnerInfo.token
     }
     }).then((response) => {
-      console.log(response.data)
+    //   console.log(response.data)
       if(response.data.success){
+        setBackdrop(false)
         setSuccess(true)
         setSuccessMessage(response.data.message)
       }else{
+        setBackdrop(false)
         setError(true)
         setErrorMessage(response.data.message)
       }
@@ -523,6 +595,11 @@ function EditVenue() {
             </SoftBox>
 
           </SoftBox>
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={backdrop}>
+        <CircularProgress color="inherit" />
+        </Backdrop>
         </SoftBox>
           </Card>
         </SoftBox>

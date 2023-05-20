@@ -29,7 +29,7 @@ import Table from "examples/Tables/Table";
 // Data
 // import partnersTableData from "layouts/tables/data/partnersTableData";
 
-import { Checkbox, FormControlLabel, FormGroup, Grid, Icon, Switch } from "@mui/material";
+import { Backdrop, Checkbox, CircularProgress, FormControlLabel, FormGroup, Grid, Icon, Switch } from "@mui/material";
 import SoftButton from "components/SoftButton";
 
 import { useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ function AddVenue() {
   const [city,setCity] = useState("")
   const [address,setAddress] = useState("")
   const [description,setDescription] = useState("")
-  const [contactNum,setContactNum] = useState("")
+  const [contactNum,setContactNum] = useState()
   const [mondayFrom,setMondayFrom] = useState("")
   const [mondayTo,setMondayTo] = useState("")
   const [tuesdayFrom,setTuesdayFrom] = useState("")
@@ -83,6 +83,7 @@ function AddVenue() {
   const [sundayOpen,setSundayOpen] = useState(false)
   const [holidayOpen,setHolidayOpen] = useState(false)
   const [price,setPrice] = useState(0)
+  const [backdrop,setBackdrop] = useState(false)
   let navigate = useNavigate();
   
   const [files, setFiles] = useState([]);
@@ -96,7 +97,8 @@ function AddVenue() {
   const handleSubmit = async (e) => {
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
-    const data = {name:name,city:city,address:address,description:description,cheapestPrice:price,venuePhone:contactNum,postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
+    setBackdrop(true)
+    const data = {name:name,city:city,address:address,description:description,cheapestPrice:price,venuePhone:contactNum,postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,playPark:playPark,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
     await courtena.post("/venues/create",{...data},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,9 +108,11 @@ function AddVenue() {
     }).then((response) => {
       console.log(response.data)
       if(response.data.success){
+        setBackdrop(false)
         setSuccess(true)
         setSuccessMessage(response.data.message)
       }else{
+        setBackdrop(false)
         setError(true)
         setErrorMessage(response.data.message)
       }
@@ -521,6 +525,11 @@ function AddVenue() {
             </SoftBox>
 
           </SoftBox>
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={backdrop}>
+        <CircularProgress color="inherit" />
+        </Backdrop>
         </SoftBox>
           </Card>
         </SoftBox>

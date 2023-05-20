@@ -31,6 +31,9 @@ import Reports from "layouts/reports";
 import Venues from "layouts/venues";
 import AddVenue from "layouts/venues/AddVenue";
 import EditVenue from "layouts/venues/EditVenue";
+import Courts from "layouts/courts";
+import AddCourt from "layouts/courts/AddCourt";
+import EditCourt from "layouts/courts/EditCourt";
 
 
 const allRoutes = [
@@ -77,6 +80,33 @@ const allRoutes = [
     route: "/venues",
     icon: <Shop size="12px" />,
     component: <Venues />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Courts",
+    key: "courts",
+    route: "/courts",
+    icon: <Shop size="12px" />,
+    component: <Courts />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Add Court",
+    key: "add-court",
+    route: "/courts/add-court",
+    icon: <Shop size="12px" />,
+    component: <AddCourt />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Edit Court",
+    key: "edit-court",
+    route: "/courts/edit-court",
+    icon: <Shop size="12px" />,
+    component: <EditCourt />,
     noCollapse: true,
   },
   {
