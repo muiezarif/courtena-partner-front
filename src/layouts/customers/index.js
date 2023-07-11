@@ -27,20 +27,66 @@ import Footer from "examples/Footer";
 import Table from "examples/Tables/Table";
 
 // Data
-import partnersTableData from "layouts/partners/data/partnersTableData";
+// import partnersTableData from "layouts/partners/data/partnersTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
-import { Grid, Icon } from "@mui/material";
+import { Chip, Grid, Icon } from "@mui/material";
 import SoftButton from "components/SoftButton";
 // import partnersTableData from "./data/partnersTableData";
 import { useNavigate } from "react-router-dom";
+import courtena from "api/courtena";
+import { useEffect, useState } from "react";
 
 function Customers() {
-  const { columns, rows } = partnersTableData;
+  // const { columns, rows } = partnersTableData;
   const { columns: prCols, rows: prRows } = projectsTableData;
+  const [customers,setCustomers] = useState()
   let navigate = useNavigate();
+  const partnersTableData = {
+    columns: [
+      { name: "name", align: "center" },
+      { name: "phone", align: "center" },
+      { name: "email", align: "center" },
+      { name: "country", align: "center" },
+      { name: "city", align: "center" },
+    ],
+  };
+const { columns } = partnersTableData;
+  const getCustomersOfPartner = async () => {
+    var partnerInfoString = localStorage.getItem("partner")
+    var partnerInfo = JSON.parse(partnerInfoString)
+    // alert("IN")
+    await courtena.get("/partner/customers/"+partnerInfo._id,{
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
+        'Authorization': partnerInfo.token
+    }
+    }).then((res) => {
+      if(res.data.success){
+        let newCustomers = []
+        res.data.result.map((item) => {
+          newCustomers.push({
+            name:(<Chip label={item.username}/>),
+            phone:(<Chip label={item.phone}/>),
+            email:(<Chip label={item.email}/>),
+            country:(<Chip label={item.country}/>),
+            city:(<Chip label={item.city}/>),
+        })
+        })
+        setCustomers(newCustomers)
+      }else{
+        console.log(res.data.message)
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+  useEffect(() => {
+    getCustomersOfPartner()
+  },[])
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card> 
@@ -66,7 +112,7 @@ function Customers() {
                 },
               }}
             >
-              <Table columns={columns} rows={rows} />
+              <Table columns={columns} rows={customers} />
             </SoftBox>
           </Card>
         </SoftBox>

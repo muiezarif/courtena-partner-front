@@ -67,25 +67,25 @@ function Footer() {
         </Grid>
         <Grid item xs={12} lg={8}>
           <SoftBox display="flex" justifyContent="center" mt={1} mb={3}>
-            <SoftBox mr={3} color="secondary">
+            <SoftBox mr={3} color="light">
               <FacebookIcon fontSize="small" />
             </SoftBox>
-            <SoftBox mr={3} color="secondary">
+            <SoftBox mr={3} color="light">
               <TwitterIcon fontSize="small" />
             </SoftBox>
-            <SoftBox mr={3} color="secondary">
+            <SoftBox mr={3} color="light">
               <InstagramIcon fontSize="small" />
             </SoftBox>
-            <SoftBox mr={3} color="secondary">
+            <SoftBox mr={3} color="light">
               <PinterestIcon fontSize="small" />
             </SoftBox>
-            <SoftBox color="secondary">
+            <SoftBox color="light">
               <LinkedInIcon fontSize="small" />
             </SoftBox>
           </SoftBox>
         </Grid>
         <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
-          <SoftTypography variant="body2" color="secondary">
+          <SoftTypography variant="body2" color="light">
             Copyright &copy; {(new Date().getFullYear())} by Courtena.
           </SoftTypography>
         </Grid>

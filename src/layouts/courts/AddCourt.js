@@ -56,9 +56,10 @@ function AddCourt() {
   const [panoramic,setPanoramic] = useState(false)
   const [single,setSingle] = useState(false)
   const [double,setDouble] = useState(false)
-  const [price,setPrice] = useState()
+  const [price,setPrice] = useState(0)
   const [maxPeople,setMaxPeople] = useState()
   const [backdrop,setBackdrop] = useState(false)
+  const [showSports,setShowSports] = useState(false)
   const [allSports,setAllSports] = useState([])
   const [allVenues,setAllVenues] = useState([])
   let navigate = useNavigate();
@@ -71,7 +72,7 @@ function AddCourt() {
   async function getAllSports(){
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
-    await courtena.get("/sports",{
+    await courtena.get("/sports/",{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': '*/*',
@@ -103,7 +104,7 @@ function AddCourt() {
   async function getAllVenues(){
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
-    await courtena.get("/venues/",{
+    await courtena.get("/venues/"+partnerInfo._id,{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': '*/*',
@@ -113,16 +114,23 @@ function AddCourt() {
         let newAllVenues = []
         console.log(response.data)
         if(response.data.success){
-            response.data.result.map((item) => {
+            if(response.data.result.venues !== []){
+              response.data.result.venues.map((item) => {
                 newAllVenues.push({
                     name:item.name,
                     id:item._id
                 })
             })
-            
             setAllVenues(newAllVenues)
-            setVenue(newAllVenues[0].id)
-            console.log(newAllVenues[0].id)
+            // setVenue(newAllVenues[0].id)
+            // console.log(newAllVenues[0].id)
+            }else{
+              setAllVenues([])
+              setVenue()
+            }
+            
+            
+            
             
         }else{
             setAllSports([])
@@ -137,8 +145,17 @@ function AddCourt() {
     var partnerInfo = JSON.parse(partnerInfoString)
     getAllSports()
     getAllVenues()
+    console.log(allSports)
     
   },[])
+  useEffect(() => {
+    console.log(sports)
+    console.log(venue)
+    console.log(allSports)
+    console.log(allVenues)
+
+    
+  },[sports,allSports,venue,allVenues])
   const handleSubmit = async (e) => {
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
@@ -194,7 +211,7 @@ function AddCourt() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card> 
@@ -224,9 +241,9 @@ function AddCourt() {
                 </SoftBox>
                 </Grid>
                 <Grid item xs={12} md={6} xl={4}>
-                <SoftBox mb={2}>
+                {/* <SoftBox mb={2}>
                     <SoftInput name="price" value={price} onChange={(val) => setPrice(val.target.value)} type="number" placeholder="Price(60min)" />
-                </SoftBox>
+                </SoftBox> */}
                 </Grid>
                 <Grid item xs={12} md={6} xl={4}>
                 <SoftBox mb={2}>
@@ -234,26 +251,7 @@ function AddCourt() {
                 </SoftBox>
                 </Grid>
                 
-                <Grid item xs={12} md={3} xl={2}>
-                <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-                    Sports
-                </SoftTypography>
-                <Select
-                    className="selectArrow"
-                    labelId="sports-label-id"
-                    id="sports-label-id"
-                    value={sports}
-                    label="Sports"
-                    style={{width:"100%"}}
-                    IconComponent={() =><ArrowDropDown/>}
-                    onChange={(val) => {setSports(val.target.value)}}
-                >
-                    {allSports.map(item => <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
-                    
-                    {/* <MenuItem value="tennis">Tennis</MenuItem>
-                    <MenuItem value="squash">Squash</MenuItem> */}
-                </Select>
-                </Grid>
+                
                 <Grid item xs={12} md={3} xl={2}>
                 <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
                     Court Type
@@ -291,6 +289,27 @@ function AddCourt() {
                     {/* <MenuItem value="venue1">Venue 1</MenuItem>
                     <MenuItem value="venue2">Venue 2</MenuItem>
                     <MenuItem value="venue3">Venue 3</MenuItem> */}
+                </Select>
+                </Grid>
+                <Grid visibility="hidden" item xs={12} md={3} xl={2}>
+                <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+                    Sports
+                </SoftTypography>
+                <Select
+                    className="selectArrow"
+                    labelId="sports-label-id"
+                    id="sports-label-id"
+                    value={sports ? sports : null}
+                    label="Sports"
+                    style={{width:"100%"}}
+                    hidden="true"
+                    IconComponent={() =><ArrowDropDown/>}
+                    onChange={(val) => {setSports(val.target.value)}}
+                >
+                    {allSports.map(item => <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>)}
+                    
+                    {/* <MenuItem value="tennis">Tennis</MenuItem>
+                    <MenuItem value="squash">Squash</MenuItem> */}
                 </Select>
                 </Grid>
                 <Grid item xs={12} md={6} xl={4}>

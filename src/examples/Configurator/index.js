@@ -96,7 +96,7 @@ function Configurator() {
       >
         <SoftBox>
           <SoftTypography variant="h5">Dashboard Configs</SoftTypography>
-          <SoftTypography variant="body2" color="text">
+          <SoftTypography variant="body2" color="dark">
             See our dashboard options.
           </SoftTypography>
         </SoftBox>
@@ -155,7 +155,7 @@ function Configurator() {
 
         <SoftBox mt={3} lineHeight={1}>
           <SoftTypography variant="h6">Sidenav Type</SoftTypography>
-          <SoftTypography variant="button" color="text" fontWeight="regular">
+          <SoftTypography variant="button" color="dark" fontWeight="regular">
             Choose between 2 different sidenav types.
           </SoftTypography>
 
@@ -166,7 +166,7 @@ function Configurator() {
             }}
           >
             <SoftButton
-              color="info"
+              color="dark"
               variant={transparentSidenav ? "gradient" : "outlined"}
               onClick={handleTransparentSidenav}
               disabled={disabled}
@@ -179,7 +179,7 @@ function Configurator() {
               Transparent
             </SoftButton>
             <SoftButton
-              color="info"
+              color="dark"
               variant={transparentSidenav ? "outlined" : "gradient"}
               onClick={handleWhiteSidenav}
               disabled={disabled}

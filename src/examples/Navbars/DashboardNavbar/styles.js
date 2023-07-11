@@ -16,7 +16,7 @@ function navbar(theme, ownerState) {
   const { palette, boxShadows, functions, transitions, breakpoints, borders } = theme;
   const { transparentNavbar, absolute, light } = ownerState;
 
-  const { dark, white, text, transparent } = palette;
+  const { secondary,dark, white, text, transparent } = palette;
   const { navbarBoxShadow } = boxShadows;
   const { rgba, pxToRem } = functions;
   const { borderRadius } = borders;
@@ -25,7 +25,7 @@ function navbar(theme, ownerState) {
     boxShadow: transparentNavbar || absolute ? "none" : navbarBoxShadow,
     backdropFilter: transparentNavbar || absolute ? "none" : `saturate(200%) blur(${pxToRem(30)})`,
     backgroundColor:
-      transparentNavbar || absolute ? `${transparent.main} !important` : rgba(white.main, 0.8),
+      transparentNavbar || absolute ? `${transparent.main} !important` : rgba(secondary.main, 0.8),
 
     color: () => {
       let color;

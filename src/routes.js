@@ -59,6 +59,9 @@ import ForgotPassword from "layouts/authentication/forgotpassword";
 import Partners from "layouts/partners";
 import Venues from "layouts/venues";
 import Courts from "layouts/courts";
+import { Business,SportsTennis,Group,BookOnline,RequestQuote,CardMembership,Assessment,PriceChange } from "@mui/icons-material";
+import Pricing from "layouts/pricing";
+import BillingInformation from "layouts/billinginformation";
 
 const routes = [
   {
@@ -93,7 +96,7 @@ const routes = [
     name: "Venues",
     key: "venues",
     route: "/venues",
-    icon: <Shop size="12px" />,
+    icon: <Business size="10px" />,
     component: <Venues />,
     noCollapse: true,
   },
@@ -102,8 +105,26 @@ const routes = [
     name: "Courts",
     key: "courts",
     route: "/courts",
-    icon: <Shop size="12px" />,
+    icon: <SportsTennis size="10px" />,
     component: <Courts />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Pricing",
+    key: "pricing",
+    route: "/pricing",
+    icon: <PriceChange size="10px" />,
+    component: <Pricing />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Billing",
+    key: "billing",
+    route: "/billing",
+    icon: <CreditCard size="14px" />,
+    component: <BillingInformation />,
     noCollapse: true,
   },
   {
@@ -111,7 +132,7 @@ const routes = [
     name: "Customers",
     key: "customers",
     route: "/customers",
-    icon: <Shop size="12px" />,
+    icon: <Group size="12px" />,
     component: <Dashboard />,
     noCollapse: true,
   },
@@ -120,7 +141,7 @@ const routes = [
     name: "Bookings",
     key: "bookings",
     route: "/bookings",
-    icon: <Shop size="12px" />,
+    icon: <BookOnline size="10px" />,
     component: <Dashboard />,
     noCollapse: true,
   },
@@ -129,16 +150,16 @@ const routes = [
     name: "Settlements",
     key: "settlements",
     route: "/settlements",
-    icon: <Shop size="12px" />,
+    icon: <RequestQuote size="10px" />,
     component: <Dashboard />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "Subscriptions",
+    name: "Subscription",
     key: "subscriptions",
     route: "/subscriptions",
-    icon: <Shop size="12px" />,
+    icon: <CardMembership size="10px" />,
     component: <Dashboard />,
     noCollapse: true,
   },
@@ -147,7 +168,7 @@ const routes = [
     name: "Reports",
     key: "reports",
     route: "/reports",
-    icon: <Shop size="12px" />,
+    icon: <Assessment size="10px" />,
     component: <Dashboard />,
     noCollapse: true,
   },
@@ -162,9 +183,9 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Billing",
-    key: "billing",
-    route: "/billing",
+    name: "Billing Demo",
+    key: "billing-demo",
+    route: "/billing-demo",
     icon: <CreditCard size="12px" />,
     component: <Billing />,
     noCollapse: true,

@@ -34,7 +34,7 @@ import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
 
 // Images
-import curved6 from "assets/images/curved-images/curved14.jpg";
+import curved6 from "assets/images/curved-images/courtena_partner_register.jpg";
 import { useNavigate } from "react-router-dom";
 import SoftAlert from "components/SoftAlert";
 import courtena from "api/courtena";
@@ -151,7 +151,7 @@ function SignUp() {
               </SoftButton>
             </SoftBox>
             <SoftBox mt={3} textAlign="center">
-              <SoftTypography variant="button" color="text" fontWeight="regular">
+              <SoftTypography variant="button" color="dark" fontWeight="regular">
                 Already have an account?&nbsp;
                 <SoftTypography
                   component={Link}

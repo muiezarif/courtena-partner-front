@@ -25,18 +25,18 @@ import Icon from "@mui/material/Icon";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
-function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction }) {
+function MiniStatisticsCard({ bgColor,color, title, count, percentage, icon, direction }) {
   return (
     <Card>
-      <SoftBox bgColor={bgColor} variant="gradient">
+      <SoftBox bgColor={bgColor}>
         <SoftBox p={2}>
           <Grid container alignItems="center">
             {direction === "left" ? (
               <Grid item>
                 <SoftBox
-                  variant="gradient"
+                  // variant="gradient"
                   bgColor={bgColor === "white" ? icon.color : "white"}
-                  color={bgColor === "white" ? "white" : "dark"}
+                  color={color === "white" ? "white" : "dark"}
                   width="3rem"
                   height="3rem"
                   borderRadius="md"
@@ -109,6 +109,7 @@ MiniStatisticsCard.defaultProps = {
     fontWeight: "medium",
     text: "",
   },
+  color:"accent",
   percentage: {
     color: "success",
     text: "",
@@ -119,6 +120,16 @@ MiniStatisticsCard.defaultProps = {
 // Typechecking props for the MiniStatisticsCard
 MiniStatisticsCard.propTypes = {
   bgColor: PropTypes.oneOf([
+    "white",
+    "primary",
+    "secondary",
+    "info",
+    "success",
+    "warning",
+    "error",
+    "dark",
+  ]),
+  color: PropTypes.oneOf([
     "white",
     "primary",
     "secondary",

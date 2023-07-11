@@ -34,6 +34,12 @@ import EditVenue from "layouts/venues/EditVenue";
 import Courts from "layouts/courts";
 import AddCourt from "layouts/courts/AddCourt";
 import EditCourt from "layouts/courts/EditCourt";
+import Pricing from "layouts/pricing";
+import { PriceChange } from "@mui/icons-material";
+import AddPricing from "layouts/pricing/AddPricing";
+import EditPricing from "layouts/pricing/EditPricing";
+import BillingInformation from "layouts/billinginformation";
+import ResetPassword from "layouts/authentication/resetpassword";
 
 
 const allRoutes = [
@@ -89,6 +95,42 @@ const allRoutes = [
     route: "/courts",
     icon: <Shop size="12px" />,
     component: <Courts />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Pricing",
+    key: "pricing",
+    route: "/pricing",
+    icon: <PriceChange size="10px" />,
+    component: <Pricing />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Billing",
+    key: "billing",
+    route: "/billing",
+    icon: <CreditCard size="12px" />,
+    component: <BillingInformation />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Add Pricing",
+    key: "add-pricing",
+    route: "/pricing/add-pricing",
+    icon: <Shop size="12px" />,
+    component: <AddPricing />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Edit Pricing",
+    key: "edit-pricing",
+    route: "/pricing/edit-pricing",
+    icon: <Shop size="12px" />,
+    component: <EditPricing />,
     noCollapse: true,
   },
   {
@@ -192,9 +234,9 @@ const allRoutes = [
   },
   {
     type: "collapse",
-    name: "Billing",
-    key: "billing",
-    route: "/billing",
+    name: "Billing Demo",
+    key: "billing-demo",
+    route: "/billing-demo",
     icon: <CreditCard size="12px" />,
     component: <Billing />,
     noCollapse: true,
@@ -234,6 +276,15 @@ const allRoutes = [
     route: "/authentication/sign-in",
     icon: <Document size="12px" />,
     component: <SignIn />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Sign In",
+    key: "sign-in",
+    route: "/authentication/reset-password",
+    icon: <Document size="12px" />,
+    component: <ResetPassword />,
     noCollapse: true,
   },
   {

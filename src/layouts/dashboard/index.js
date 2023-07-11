@@ -96,7 +96,7 @@ function Dashboard() {
             <Configurator />
             {configsButton}
           </>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>

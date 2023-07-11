@@ -31,7 +31,7 @@ import SoftButton from "components/SoftButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
-import curved9 from "assets/images/curved-images/curved-6.jpg";
+import curved9 from "assets/images/curved-images/courten_partner_login.jpg";
 import {connect, useDispatch} from "react-redux"
 import { loginAdmin } from "../../../actions";
 import courtena from "api/courtena";
@@ -85,7 +85,7 @@ function SignIn(props) {
         {error ? <SoftAlert color="error" dismissible onClick={() => setError(false)} > {errorMessage}</SoftAlert> : null}
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
+            <SoftTypography component="label" variant="caption" color="light" fontWeight="bold">
               Email
             </SoftTypography>
           </SoftBox>
@@ -93,7 +93,7 @@ function SignIn(props) {
         </SoftBox>
         <SoftBox mb={2}>
           <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
+            <SoftTypography component="label" variant="caption" color="light" fontWeight="bold">
               Password
             </SoftTypography>
           </SoftBox>

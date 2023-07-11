@@ -242,12 +242,12 @@ function EditVenue() {
           </SoftTypography>
         </SoftBox>
         <SoftBox pt={1.5} pb={2} px={2} lineHeight={1.25}>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Monday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={mondayOpen} onChange={() => setMondayOpen(!mondayOpen)} />
@@ -255,7 +255,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -263,7 +263,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -273,12 +273,12 @@ function EditVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Tuesday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={tuesdayOpen} onChange={() => setTuesdayOpen(!tuesdayOpen)} />
@@ -286,7 +286,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -294,7 +294,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -304,12 +304,12 @@ function EditVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Wednesday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={wednesdayOpen} onChange={() => setWednesdayOpen(!wednesdayOpen)} />
@@ -317,7 +317,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -325,7 +325,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -335,12 +335,12 @@ function EditVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Thursday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={thursdayOpen} onChange={() => setThursdayOpen(!thursdayOpen)} />
@@ -348,7 +348,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -356,7 +356,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -366,12 +366,12 @@ function EditVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Friday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={fridayOpen} onChange={() => setFridayOpen(!fridayOpen)} />
@@ -379,7 +379,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -387,7 +387,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -402,12 +402,12 @@ function EditVenue() {
             Weekend
           </SoftTypography>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Saturday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={saturdayOpen} onChange={() => setSaturdayOpen(!saturdayOpen)} />
@@ -415,7 +415,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -423,7 +423,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -433,12 +433,12 @@ function EditVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Sunday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={sundayOpen} onChange={() => setSundayOpen(!sundayOpen)} />
@@ -446,7 +446,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -454,7 +454,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -472,7 +472,7 @@ function EditVenue() {
           
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={holidayOpen} onChange={() => setHolidayOpen(!holidayOpen)} />
@@ -480,7 +480,7 @@ function EditVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -488,7 +488,7 @@ function EditVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -504,7 +504,7 @@ function EditVenue() {
   }
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card> 

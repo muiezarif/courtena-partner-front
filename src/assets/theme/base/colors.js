@@ -18,19 +18,27 @@ Coded by www.creative-tim.com
  * You can add new color using this file.
  * You can customized the colors for the entire Soft UI Dashboard React using thie file.
  */
-
+// primary = #2c3856
+// secondary = #3d4e78
+// dark = #1b2234
+// accent = #a5d9f3
+// accentLight = #d2ecf9
 const colors = {
   background: {
-    default: "#f8f9fa",
+    // default: "#f8f9fa",
+    default: "#2c3856",
   },
 
   text: {
-    main: "#67748e",
+    // main: "#67748e",
+    main: "#a5d9f3",
     focus: "#67748e",
+    accent:"#a5d9f3"
   },
 
   transparent: {
     main: "transparent",
+    secondary: "rgba(255,255,255,0.8)",
   },
 
   white: {
@@ -40,23 +48,27 @@ const colors = {
 
   black: {
     light: "#141414",
-    main: "#000000",
+    // main: "#000000",
+    main: "#1b2234",
     focus: "#000000",
   },
 
   primary: {
-    main: "#cb0c9f",
+    main: "#2c3856",
+    // main: "#cb0c9f",
     focus: "#ad0a87",
   },
 
   secondary: {
-    main: "#8392ab",
+    // main: "#8392ab",
+    main: "#3d4e78",
     focus: "#96a2b8",
   },
 
   info: {
-    main: "#17c1e8",
-    focus: "#3acaeb",
+    // main: "#a5d9f3",
+    main: "#a5d9f3",
+    focus: "#a5d9f3",
   },
 
   success: {
@@ -75,12 +87,14 @@ const colors = {
   },
 
   light: {
-    main: "#e9ecef",
+    // main: "#e9ecef",
+    main: "#d2ecf9",
     focus: "#e9ecef",
   },
 
   dark: {
-    main: "#344767",
+    // main: "#344767",
+    main: "#1b2234",
     focus: "#344767",
   },
 
@@ -98,18 +112,21 @@ const colors = {
 
   gradients: {
     primary: {
-      main: "#7928ca",
+      // main: "#7928ca",
+      main: "#2c3856",
       state: "#ff0080",
     },
 
     secondary: {
-      main: "#627594",
+      // main: "#627594",
+      main: "#3d4e78",
       state: "#a8b8d8",
     },
 
     info: {
-      main: "#2152ff",
-      state: "#21d4fd",
+      // main: "#a5d9f3",
+      main: "#a5d9f3",
+      state: "#a5d9f3",
     },
 
     success: {
@@ -128,12 +145,14 @@ const colors = {
     },
 
     light: {
-      main: "#ced4da",
+      // main: "#ced4da",
+      main: "#d2ecf9",
       state: "#ebeff4",
     },
 
     dark: {
-      main: "#141727",
+      // main: "#141727",
+      main: "#1b2234",
       state: "#3a416f",
     },
   },

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -35,55 +35,57 @@ import Separator from "layouts/authentication/components/Separator";
 
 // Images
 import curved6 from "assets/images/curved-images/curved14.jpg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import SoftAlert from "components/SoftAlert";
 import courtena from "api/courtena";
-function ForgotPassword() {
-  const [email, setEmail] = useState("");
+function ResetPassword() {
+  const [password, setPassword] = useState("");
+  const [cpassword, setCPassword] = useState("");
   const [error,setError] = useState(false)
   const [success,setSuccess] = useState(false)
   const [errorMessage,setErrorMessage] = useState("")
   const [successMessage,setSuccessMessage] = useState("")
   const handleSetAgremment = () => setAgremment(!agreement);
   let navigate = useNavigate();
+  let location = useLocation();
 
   const handleSubmit = async (e) => {
-    const data = {email:email}
-    // const data = {}
-    console.log(email)
-    await courtena.post("/auth/forgot-password-partner",{...data},{
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': '*/*'
-    }
-    }).then((response) => {
-      console.log(response.data)
-      if(response.data.success){
-        setSuccess(true)
-        setSuccessMessage(response.data.message)
-        // localStorage.setItem('admin', JSON.stringify(response.data.result));
-        // localStorage.setItem('token', response.data.result.token);
-        // localStorage.setItem('adminRemainLoggedIn', true);
-        // if(rememberMe){
-        //   localStorage.setItem('adminRemainLoggedIn', true);
-        // }else{
-        //   localStorage.setItem('adminRemainLoggedIn', false);
-        // }
-        // navigate("/dashboard")
-      }else{
-        setError(true)
-        setErrorMessage(response.data.message)
-      }
-      
-    }).catch(err => console.log(err.message));
+    // let data
+    const queryParams = new URLSearchParams(location.search);
+    const paramValue = queryParams.get('token');
     
-    // this.props.loginAdmin(data).then(() => {
-    //   console.log("API hit")
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+    if(password === cpassword){
+        console.log(paramValue)
+        const data = {password:password,fp:paramValue}
+        await courtena.post("/auth/reset-password-partner",{...data},{
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Accept': '*/*'
+          }
+          }).then((response) => {
+            console.log(response.data)
+            if(response.data.success){
+              setSuccess(true)
+              setSuccessMessage(response.data.message)
+            }else{
+              setError(true)
+              setErrorMessage(response.data.message)
+            }
+            
+          }).catch(err => console.log(err.message));
+    }else{
+        setError(true)
+        setErrorMessage("Passwords don't match")
+        return
+    }
+
 
   }
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const paramValue = queryParams.get('token');
+    console.log(paramValue)
+  },[])
   return (
     <BasicLayout
       title=""
@@ -93,7 +95,7 @@ function ForgotPassword() {
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
-            Forgot Password ?
+            Reset Password 
           </SoftTypography>
         </SoftBox>
         {/* <SoftBox mb={2}>
@@ -105,9 +107,11 @@ function ForgotPassword() {
           {error ? <SoftAlert color="error" dismissible onClick={() => setError(false)} > {errorMessage}</SoftAlert> : null}
           {success ? <SoftAlert color="success" dismissible onClick={() => setSuccess(false)} > {successMessage}</SoftAlert> : null}
             <SoftBox mb={2}>
-              <SoftInput name="email" onChange={(val) => setEmail(val.target.value)} type="email" placeholder="Email" />
+              <SoftInput name="password" value={password} onChange={(val) => setPassword(val.target.value)} type="password" placeholder="Password" />
             </SoftBox>
-            
+            <SoftBox mb={2}>
+              <SoftInput name="confirmpassword" value={cpassword} onChange={(val) => setCPassword(val.target.value)} type="password" placeholder="Confirm Password" />
+            </SoftBox>
             <SoftBox mt={4} mb={1}>
               <SoftButton onClick={() => handleSubmit()} variant="gradient" color="dark" fullWidth>
                 Send
@@ -135,4 +139,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

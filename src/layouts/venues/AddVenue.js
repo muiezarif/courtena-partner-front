@@ -87,8 +87,11 @@ function AddVenue() {
   let navigate = useNavigate();
   
   const [files, setFiles] = useState([]);
+  const [file, setFile] = useState('');
   const updateFiles = (incommingFiles) => {
+    console.log(incommingFiles)
     setFiles(incommingFiles);
+    
   };
   useEffect(() => {
     var partnerInfoString = localStorage.getItem("partner")
@@ -98,11 +101,31 @@ function AddVenue() {
     var partnerInfoString = localStorage.getItem("partner")
     var partnerInfo = JSON.parse(partnerInfoString)
     setBackdrop(true)
-    const data = {name:name,city:city,address:address,description:description,cheapestPrice:price,venuePhone:contactNum,postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,playPark:playPark,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
-    await courtena.post("/venues/create",{...data},{
+    const formData = new FormData()
+    const data = {name:name,city:city,address:address,photos:files,description:description,cheapestPrice:price,venuePhone:contactNum,
+      postalCode:1234,amenities:{cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,playPark:playPark,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi},
+      timing:{mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo},partner:partnerInfo._id}
+    formData.append("name",name)
+    formData.append("city",city)
+    formData.append("address",address)
+    // for(let i = 0; i< files.length; i++){
+    //   console.log(files[i].file)
+    //   formData.append("images",files[i])
+    // }
+    for(let i = 0; i< files.length; i++){
+      formData.append("photos",files[i].file)
+    }
+    // formData.append("photos",JSON.stringify(files))
+    formData.append("description",description)
+    formData.append("cheapestPrice",price)
+    formData.append("venuePhone",contactNum)
+    formData.append("postalCode",1234)
+    formData.append("partner",partnerInfo._id)
+    formData.append("amenities",JSON.stringify({cafeteria:cafeteria,changeRoom:changingRoom,disabledAccess:disabledAccess,playPark:playPark,freeParking:freeParking,lockers:lockers,materialRenting:materialRenting,privateParking:privateParking,restaurant:restaurant,snackbar:snackbar,store:store,vendingMachine:vendingMachine,wifi:wifi}))
+    formData.append("timing",JSON.stringify({mondayOn:mondayOpen,mondayFrom:mondayFrom,mondayTo:mondayTo,tuesdayOn:tuesdayOpen,tuesdayFrom:tuesdayFrom,tuesdayTo:tuesdayTo,wedOn:wednesdayOpen,wedFrom:wedFrom,wedTo:wedTo,thursdayOn:thursdayOpen,thursdayFrom:thursdayFrom,thursdayTo:thursdayTo,fridayOn:fridayOpen,fridayFrom:friFrom,fridayTo:friTo,satOn:saturdayOpen,satFrom:satFrom,satTo:satTo,sunOn:sundayOpen,sunFrom:sunFrom,sunTo:sunTo,holidayOn:holidayOpen,holidayFrom:holidayFrom,holidayTo:holidayTo}))
+    await courtena.post("/venues/create",formData,{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': '*/*',
         'Authorization': partnerInfo.token
     }
     }).then((response) => {
@@ -172,12 +195,12 @@ function AddVenue() {
           </SoftTypography>
         </SoftBox>
         <SoftBox pt={1.5} pb={2} px={2} lineHeight={1.25}>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Monday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={mondayOpen} onChange={() => setMondayOpen(!mondayOpen)} />
@@ -185,7 +208,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -193,7 +216,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -203,12 +226,12 @@ function AddVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Tuesday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={tuesdayOpen} onChange={() => setTuesdayOpen(!tuesdayOpen)} />
@@ -216,7 +239,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -224,7 +247,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -234,12 +257,12 @@ function AddVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Wednesday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={wednesdayOpen} onChange={() => setWednesdayOpen(!wednesdayOpen)} />
@@ -247,7 +270,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -255,7 +278,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -265,12 +288,12 @@ function AddVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Thursday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={thursdayOpen} onChange={() => setThursdayOpen(!thursdayOpen)} />
@@ -278,7 +301,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -286,7 +309,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -296,12 +319,12 @@ function AddVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Friday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={fridayOpen} onChange={() => setFridayOpen(!fridayOpen)} />
@@ -309,7 +332,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -317,7 +340,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -332,12 +355,12 @@ function AddVenue() {
             Weekend
           </SoftTypography>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Saturday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={saturdayOpen} onChange={() => setSaturdayOpen(!saturdayOpen)} />
@@ -345,7 +368,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -353,7 +376,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -363,12 +386,12 @@ function AddVenue() {
               </Grid>
             </SoftBox>
           </SoftBox>
-          <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+          <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
             Sunday
           </SoftTypography>
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={sundayOpen} onChange={() => setSundayOpen(!sundayOpen)} />
@@ -376,7 +399,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -384,7 +407,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -402,7 +425,7 @@ function AddVenue() {
           
           <SoftBox display="flex" py={1} mb={0.25}>
             <SoftBox mt={0.25}>
-            <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+            <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    Open
                   </SoftTypography>
               <Switch checked={holidayOpen} onChange={() => setHolidayOpen(!holidayOpen)} />
@@ -410,7 +433,7 @@ function AddVenue() {
             <SoftBox width="80%" ml={2}>
             <Grid container spacing={2}>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    From
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -418,7 +441,7 @@ function AddVenue() {
                   </SoftBox>
                   </Grid>
                   <Grid item md={6}>
-                  <SoftTypography variant="caption" fontWeight="bold" color="text" textTransform="uppercase">
+                  <SoftTypography variant="caption" fontWeight="bold" color="dark" textTransform="uppercase">
                    To
                   </SoftTypography>
                   <SoftBox mb={2}>
@@ -434,7 +457,7 @@ function AddVenue() {
   }
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card> 
@@ -472,16 +495,25 @@ function AddVenue() {
                     <SoftInput name="description" value={description} onChange={(val) => setDescription(val.target.value)} type="text" placeholder="Description" />
                 </SoftBox>
                 </Grid>
-                <Grid item xs={12} md={6} xl={4}>
-                <SoftBox mb={2}>
-                    <SoftInput name="price" value={price} onChange={(val) => setPrice(val.target.value)} type="text" placeholder="Price(60min)" />
-                </SoftBox>
-                </Grid>
+                
                 <Grid item xs={12} md={6} xl={4}>
                 <SoftBox mb={2}>
                     <SoftInput name="phone" required={true} value={contactNum} onChange={(val) => setContactNum(val.target.value)} type="tel" placeholder="Venue Contact Number" />
                 </SoftBox>
                 </Grid>
+                <Grid visibility="hidden" item xs={12} md={6} xl={4}>
+                <SoftBox mb={2}>
+                    <SoftInput name="price" value={price} onChange={(val) => setPrice(val.target.value)} type="text" placeholder="Price(60min)" />
+                </SoftBox>
+                </Grid>
+                {/* <Grid item xs={12} md={6} xl={4}>
+                <SoftBox mb={2}>
+                    <input name="photos" required={true} onChange={(val) => {
+                      console.log(val.target.files)
+                      setFiles(val.target.files)
+                      }} type="file" multiple />
+                </SoftBox>
+                </Grid> */}
                 <Grid item xs={12} md={6} xl={4}>
                 <SoftBox mb={2}>
                     <OpeningHours/>
@@ -496,7 +528,7 @@ function AddVenue() {
                 <SoftBox mb={2}>
                 <SoftBox>
                 <SoftTypography variant="h6">Upload Venue Images</SoftTypography>
-                <Dropzone onChange={updateFiles} value={files}>
+                <Dropzone name="photos" onChange={updateFiles} value={files}>
                     {files.map((file) => (
                         <FileMosaic key={file} {...file} preview />
                     ))}

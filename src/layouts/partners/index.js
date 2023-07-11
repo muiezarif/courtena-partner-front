@@ -40,7 +40,7 @@ function Partners() {
   let navigate = useNavigate();
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar light={true} />
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card> 

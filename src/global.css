@@ -21,3 +21,7 @@
 .selectArrow {
     color: red; /* Specify the desired color here */
   }
+
+.cursor-pointer{
+    cursor:pointer;
+}  
